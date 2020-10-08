@@ -38,7 +38,16 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-  let morseWorld = expr.split("**********");
+  let morseWord = expr.split("**********");
+  return morseWord
+    .map((item) => {
+      return item.replace(/\d{10}/g, (letter) => {
+        return MORSE_TABLE[
+          letter.replace(/(10)/g, ".").replace(/11/g, "-").replace(/0/g, "")
+        ];
+      });
+    })
+    .join(" ");
 }
 
 module.exports = {
